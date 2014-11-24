@@ -1,0 +1,15 @@
+<div ng-repeat="item in ctrl.items" class="item">
+	<div class="name">
+		<h3 ng-bind="item.name"></h3>
+	</div>
+	<div class="author">
+		<span ng-bind="item.description"></span>
+	</div>
+	<div class="controls">
+		<button ng-click="ctrl.editView(item.id)">Edit To Do</button>
+		<label>
+			<input type="checkbox" ng-model="item.complete" ng-true-value="1" ng-false-value="0" ng-change="ctrl.update(item.id)"> Complete
+		</label>
+		<button ng-click="ctrl.delete(item.id)" ng-if="item.complete" ng-disabled="!item.complete">Delete To Do</button>
+	</div>
+</div>

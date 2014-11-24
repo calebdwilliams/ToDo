@@ -1,0 +1,12 @@
+[
+	{
+		"id": 1,
+		"label": "First note",
+		"author": "Caleb"
+	},
+	{
+		"id": 2,
+		"label": "Second note",
+		"author": "Whitney"
+	}
+]
