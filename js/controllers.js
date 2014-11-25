@@ -401,7 +401,7 @@ toDoApp.controller('ToDoController', ['ToDoFactory', '$log', '$location', functi
  	};
 
  	self.cancel = function(todoID) {
- 		self.editItem = {}};
+ 		self.editItem = {};
  		$location.path('/');
  	};
 
@@ -428,6 +428,48 @@ toDoApp.controller('ToDoController', ['ToDoFactory', '$log', '$location', functi
  				$location.path('/');
  			});
  	}
+}]);
+
+toDoApp.controller('EditController', ['ToDoFactory', '$location', '$routeParams', function(ToDoFactory, $location, $routeParams) {
+	var self = this;
+
+	self.whichItem = {};
+	self.items = [];
+
+	var isEmpty = function(obj) {
+	    for(var prop in obj) {
+	        if(obj.hasOwnProperty(prop))
+	            return false;
+	    }
+
+	    return true;
+	}
+
+	var findItem = function() {
+		return ToDoFactory.query()
+			.then(function(response) {
+				// console.log($routeParams.id);
+				for (item in response.data) {
+		 			if (response.data[item]['id'] === $routeParams.id) {
+		 				self.items = response.data;
+		 				self.whichItem = response.data[item];
+		 			}
+		 		}
+			})
+	}
+
+	findItem().then(function() {
+		if (isEmpty(self.whichItem)) {
+			$location.path('/');
+		}
+	});
+
+	self.updateItem = function(item) {
+		return ToDoFactory.update(item)
+			.then(function() {
+				$location.path('/');
+			});
+	};
 }]);
 
 toDoApp.factory('ToDoFactory', ['$http', function($http) {

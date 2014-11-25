@@ -1,20 +1,32 @@
-<form id="myForm" name="updateForm" ng-submit="ctrl.updateItem(ctrl.editItem)">
-	<h2>Edit Item</h2>
-	<input type="hidden" name="id" required ng-model="ctrl.editItem.id">
-	<input type="hidden" name="date" ng-model="ctrl.editItem.date">
-	<div>
-		<label for="description">Name</label>
-		<input type="text" id="name" name="name" required placeholder="Name" ng-model="ctrl.editItem.name">
+<section class="col-8">
+	<form id="myForm" name="updateForm" ng-submit="edit.updateItem(edit.whichItem)">
+		<h2>Edit Item</h2>
+		<!-- <input type="hidden" name="id" required ng-model="ctrl.editItem.id">
+		<input type="hidden" name="date" ng-model="ctrl.editItem.date"> -->
+		<div>
+			<label for="description">Name</label>
+			<input type="text" id="name" name="name" required placeholder="Name" ng-model="edit.whichItem.name">
+		</div>
+		<div>
+			<label for="description">Description</label>
+			<textarea type="text" name="description" required placeholder="Description" ng-model="edit.whichItem.description"></textarea>
+		</div>
+		<div>
+			<label>
+				<input type="checkbox" name="complete" value="1" ng-model="edit.whichItem.complete"> Completed
+			</label>
+		</div>
+		<input type="submit" name="submit" value="Submit" class="btn" ng-disabled="updateForm.$invalid">
+		<input type="submit" name="submit" value="Cancel" class="btn" ng-click="ctrl.cancel();">
+	</form>
+</section>
+<section class="col-4">
+	<div ng-repeat="item in edit.items" class="item">
+		<div class="name">
+			<p><strong ng-bind="item.name"></strong></p>
+		</div>
+		<div class="author" ng-if="item === edit.whichItem">
+			<span ng-bind="item.description"></span>
+		</div>
 	</div>
-	<div>
-		<label for="description">Description</label>
-		<textarea type="text" name="description" required placeholder="Description" ng-model="ctrl.editItem.description"></textarea>
-	</div>
-	<div>
-		<label>
-			<input type="checkbox" name="complete" value="1" ng-model="ctrl.editItem.complete"> Completed
-		</label>
-	</div>
-	<input type="submit" name="submit" value="Submit" class="btn" ng-disabled="updateForm.$invalid">
-	<input type="submit" name="submit" value="Cancel" class="btn" ng-click="ctrl.cancel();">
-</form>
+</section>

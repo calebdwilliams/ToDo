@@ -89,14 +89,12 @@ toDoApp.config(['$routeProvider', function($routeProvider) {
 	$routeProvider.
 		when('/', {
 			controller: 'ToDoController',
-			templateUrl: 'partials/list.html'
-		}).
-		when('/app', {
-			controller: 'ToDoController',
+			controllerAs: 'ctrl',
 			templateUrl: 'partials/list.html'
 		}).
 		when('/update/:id', {
-			controller: 'ToDoController',
+			controller: 'EditController',
+			controllerAs: 'edit',
 			templateUrl: 'partials/update.html'
 		}).
 		otherwise({

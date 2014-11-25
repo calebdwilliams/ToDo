@@ -1,15 +1,36 @@
-<div ng-repeat="item in ctrl.items" class="item">
-	<div class="name">
-		<h3 ng-bind="item.name"></h3>
+<section class="col-8">
+	<div ng-repeat="item in ctrl.items" class="item">
+		<div class="name">
+			<h3 ng-bind="item.name"></h3>
+		</div>
+		<div class="author">
+			<span ng-bind="item.description"></span>
+		</div>
+		<div class="controls">
+			<button ng-click="ctrl.editView(item.id)">Edit To Do</button>
+			<label>
+				<input type="checkbox" ng-model="item.complete" ng-true-value="1" ng-false-value="0" ng-change="ctrl.update(item.id)"> Complete
+			</label>
+			<button ng-click="ctrl.delete(item.id)" ng-if="item.complete" ng-disabled="!item.complete">Delete To Do</button>
+		</div>
 	</div>
-	<div class="author">
-		<span ng-bind="item.description"></span>
-	</div>
-	<div class="controls">
-		<button ng-click="ctrl.editView(item.id)">Edit To Do</button>
-		<label>
-			<input type="checkbox" ng-model="item.complete" ng-true-value="1" ng-false-value="0" ng-change="ctrl.update(item.id)"> Complete
-		</label>
-		<button ng-click="ctrl.delete(item.id)" ng-if="item.complete" ng-disabled="!item.complete">Delete To Do</button>
-	</div>
-</div>
+</section>
+<section class="col-4">
+	<form id="myForm" name="addForm" ng-submit="ctrl.add()">
+		<h2>Add Item</h2>
+		<div>
+			<label for="description">Name</label>
+			<input type="text" name="name" required placeholder="Name" ng-model="ctrl.newTodo.name">
+		</div>
+		<div>
+			<label for="description">Description</label>
+			<textarea type="text" name="description" required placeholder="Description" ng-model="ctrl.newTodo.description"></textarea>
+		</div>
+		<div>
+			<label>
+				<input type="checkbox" name="complete" value="1" ng-model="ctrl.newTodo.complete"> Completed
+			</label>
+		</div>
+		<input type="submit" name="submit" value="Submit" class="btn" ng-disabled="addForm.$invalid">
+	</form>
+</section>
